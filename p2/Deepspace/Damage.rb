@@ -1,5 +1,6 @@
 require_relative "WeaponType.rb"
 require_relative "DamageToUI.rb"
+require_relative "Weapon.rb"
 
 module Deepspace
     class Damage
@@ -33,23 +34,55 @@ module Deepspace
         end 
 
         def arrayContainsType(w,t)
-            out = -1
+            out = @@not_used
             i = 0
             w.each do |weapon|
                 if weapon.type = t 
                     out = i
+                    break
                 end 
-                i++
+                i+=1
             end
             return out
         end 
 
         def adjust(w,s)
+            if s.count > @nShields
+                new_nShields = @nShields
+            else
+                new_nShields = s.count
+            end
 
+            if @weapons == nil
+                if w.count > @nWeapons
+                    new_nWeapons = @nWeapons
+                else
+                    new_nWeapons = w.count
+                end     
+                return Damage.newNumericWeapons(new_nWeapons,new_nShields)
+            else
+                result=[]
+				w_aux=w.clone
+				@weapons.each do |x| 	
+					i=arrayContainsType(w_aux,x);
+					if i!=@@not_used
+						result << x
+						w_aux.delete_at(i)
+					end
+				end
+				return Damage.newSpecificWeapons(result, n_shields)
+            end 
         end 
 
         def discardWeapon(w)
-
+            if @weapons != nil
+                indice = arrayContainsType(@weapons,w.type)
+                if indice != -1
+                    w.remove(indice)
+                end 
+            elsif @nWeapons-1 >= 0 
+                @nWeapons = @nWeapons-1
+            end 
         end 
 
         def discardShieldBooster()
@@ -61,9 +94,14 @@ module Deepspace
         def hasNoEffect()
             if @weapons != nil
 				return @weapons.empty? && @nShields == 0
-			  else
+            else
 				return @nShields + @nWeapons == 0
             end
-        end     
+        end
+
+        def to_s()
+            getUIversion().to_s
+        end
+
     end 
 end
