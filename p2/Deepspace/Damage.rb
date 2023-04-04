@@ -59,7 +59,7 @@ module Deepspace
                 else
                     new_nWeapons = w.count
                 end     
-                return Damage.newNumericWeapons(new_nWeapons,new_nShields)
+                Damage.newNumericWeapons(new_nWeapons,new_nShields)
             else
                 result=[]
 				w_aux=w.clone
@@ -70,7 +70,7 @@ module Deepspace
 						w_aux.delete_at(i)
 					end
 				end
-				return Damage.newSpecificWeapons(result,new_nShields)
+				Damage.newSpecificWeapons(result,new_nShields)
             end 
         end 
 
