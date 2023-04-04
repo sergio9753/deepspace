@@ -20,7 +20,7 @@ module Deepspace
         end 
 
         def self.newCopy(d)
-            if d.weapons = nil
+            if d.weapons == nil
                 Damage.newNumericWeapons(d.nWeapons,d.nShields)
             else
                 Damage.newSpecificWeapons(d.weapons,d.nShields)
@@ -37,7 +37,7 @@ module Deepspace
             out = @@not_used
             i = 0
             w.each do |weapon|
-                if weapon.type = t 
+                if weapon == t 
                     out = i
                     break
                 end 
@@ -47,10 +47,10 @@ module Deepspace
         end 
 
         def adjust(w,s)
-            if s.count > @nShields
+            if s > @nShields
                 new_nShields = @nShields
             else
-                new_nShields = s.count
+                new_nShields = s
             end
 
             if @weapons == nil
@@ -102,6 +102,17 @@ module Deepspace
         def to_s()
             getUIversion().to_s
         end
-
+        #a = Damage.newNumericWeapons(5,5)
+        #new_a = a.adjust([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA],1)
+        #puts new_a
+        #b = Damage.newNumericWeapons(2,3)
+        #new_b = b.adjust([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA],4)
+        #puts new_b
+        #c = Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA],4)
+        #new_c = c.adjust([WeaponType::MISSILE],1)
+        #puts new_c
+        #d = Damage.newSpecificWeapons([WeaponType::LASER,WeaponType::MISSILE],1)
+        #new_d = d.adjust([WeaponType::LASER,WeaponType::MISSILE,WeaponType::PLASMA,WeaponType::PLASMA],4)
+        #puts new_d
     end 
 end
