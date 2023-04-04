@@ -70,7 +70,7 @@ module Deepspace
 						w_aux.delete_at(i)
 					end
 				end
-				return Damage.newSpecificWeapons(result, n_shields)
+				return Damage.newSpecificWeapons(result,new_nShields)
             end 
         end 
 
