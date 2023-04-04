@@ -37,8 +37,8 @@ class SpaceStation {
     }
     
     SpaceStation(String n,SuppliesPackage supplies){
-        weapons = new ArrayList<Weapon>();
-        shieldBoosters = new ArrayList<ShieldBooster>();
+        weapons = new ArrayList<>();
+        shieldBoosters = new ArrayList<>();
         name = n;
         receiveSupplies(supplies);
     }
