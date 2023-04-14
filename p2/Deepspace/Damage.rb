@@ -23,7 +23,8 @@ module Deepspace
             if d.weapons == nil
                 Damage.newNumericWeapons(d.nWeapons,d.nShields)
             else
-                Damage.newSpecificWeapons(d.weapons,d.nShields)
+                copy_weapons = Array.new(d.weapons)
+                Damage.newSpecificWeapons(copy_weapons,d.nShields)
             end 
         end    
 
